@@ -199,9 +199,9 @@ class Doctor {
 	private void enterPatientMedicalInfo() {
 		System.out.println("Please enter the patient's name,medical situation, and medical treatment in order:");
 		Scanner scanner = new Scanner(System.in);
-		String patientName = scanner.next();
-		String medicalSituation = scanner.next();
-		String treatment = scanner.next();
+		String patientName = readStringWithMaxLength(scanner, 50);
+		String medicalSituation =  readStringWithMaxLength(scanner, 100);
+		String treatment = readStringWithMaxLength(scanner, 200);
 
 		BufferedWriter bw = null;
 		try {
@@ -220,5 +220,17 @@ class Doctor {
 			e.printStackTrace();
 		}
 	}
+	  private static String readStringWithMaxLength(Scanner scanner, int maxLength) {
+	        String input;
+	        do {
+	            System.out.print("Enter text (up to " + maxLength + " characters): ");
+	            input = scanner.nextLine().trim();
+	            if (input.length() > maxLength) {
+	                System.out.println("Input exceeds maximum length. Please try again.");
+	            }
+	        } while (input.length() > maxLength);
+
+	        return input;
+	    }
 
 }
