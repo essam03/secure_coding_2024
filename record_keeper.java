@@ -134,8 +134,8 @@ class RecordKeeper {
 	private void registerDoctor() {
 		String docuser;
 		String password;
-		String doctor_age;
-		String doctor_gendar;
+		int doctor_age;
+		char doctor_gendar;
 		String phone;
 		String doctor_name;
 
@@ -156,11 +156,14 @@ class RecordKeeper {
 		}
 
 		else {
-
+			System.out.println("enter the age as number and thee phone limited to 10 and write the gender as word");
 			doctor_name = scanner.next();
-			doctor_age = scanner.next();
-			doctor_gendar = scanner.next();
+			doctor_age = scanner.nextInt();
+			doctor_gendar = scanner.next().charAt(0);
 			phone = scanner.next();
+			if(phone.length()!=10 && doctor_age %1!=0 && Character.SIZE / 8 != 1 ) {
+				System.out.println("please follw the role");
+			}
 
 			BufferedWriter bw = null;
 			BufferedWriter bw1 = null;
@@ -192,8 +195,8 @@ class RecordKeeper {
 		String patuser;
 		String patient_name;
 		String password;
-		String patient_age;
-		String patient_gendar;
+		int patient_age;
+		char patient_gendar;
 		String phone;
 
 		System.out.println("Please enter the Patient's user,Password,name,age and gender,Phone in order:");
@@ -211,11 +214,15 @@ class RecordKeeper {
 		}
 
 		else {
-
+			System.out.println("enter the age as number and thee phone limited to 10 and write the gender as word");
 			patient_name = scanner.next();
-			patient_age = scanner.next();
-			patient_gendar = scanner.next();
+			patient_age = scanner.nextInt();
+			patient_gendar = scanner.next().charAt(0);
 			phone = scanner.next();
+			if(phone.length()!=10 && patient_age%1!=0 && Character.SIZE / 8 != 1 ) {
+				System.out.println("please follw the role");
+			}
+			else {
 
 			BufferedWriter bw = null;
 			BufferedWriter bw1 = null;
@@ -241,6 +248,7 @@ class RecordKeeper {
 	            MyLogger.writeToLog("Exception:: ",e);
 				e.printStackTrace();
 			}
+		}
 		}
 
 	}

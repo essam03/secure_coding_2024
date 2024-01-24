@@ -1,0 +1,37 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package classesandobjects;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+/**
+ *
+ * @author Safaa.Hriez
+ */
+public class DemoWrite {
+    public static void main(String[] args) {
+         BufferedWriter bw = null;
+         try{
+        //create the BufferedWriter to start writing to the file
+        //the file opend with the append mode
+        //if you don't want the append mode then eliminate the "true" part
+        bw = new BufferedWriter(new FileWriter("example1.txt",true));
+                
+           try{
+               //write what you want to the file
+               bw.write("hi\n");
+           }finally{
+               bw.close();
+           }
+           
+        }catch(IOException e){
+            System.out.println(e);
+        }
+    
+    }
+}

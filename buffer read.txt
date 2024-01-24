@@ -1,0 +1,34 @@
+package classesandobjects;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+
+
+public class DemoRead {
+    
+    public static void main(String[] args) {
+    //specify the name of the file if the file is within 
+    //the same folder of the project
+    BufferedReader br = null;
+try{    
+    //create the BufferReader to start reading the content of the file
+     br = new BufferedReader(new FileReader("example1.txt")); 
+    try {
+        String line;
+        //reading the file line by line
+        while ((line = br.readLine()) != null) {
+           //the line variable contains the content of the current line
+           System.out.println(line);
+        }
+        }finally {
+        //close the file
+        br.close();
+        }
+} catch(IOException e){
+        System.out.println(e);
+}
+    }  
+  
+}
