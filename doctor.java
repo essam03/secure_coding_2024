@@ -71,11 +71,14 @@ class Doctor {
 			}
 			System.out.println("Error occurred. The username or password is wrong. Please try again.");
 			return false;
-		} catch (IOException e) {
+		} catch (IOException e){
             MyLogger.writeToLog("Exception:: ",e);
 			System.out.println("there's an error occured  " + e.getMessage());
 			return false;
-		} finally {
+		}catch(ArrayIndexOutOfBoundsException e){ 
+			System.out.println("there's an error occured");
+			return false;
+		}finally {
 			if (br != null) {
 				try {
 					br.close();
@@ -120,39 +123,6 @@ class Doctor {
 		String doctor_age;
 		String doctor_gendar;
 		String phone;
-
-		System.out.println("choose which data you want: \n 1.the username and password \n 2.the resst of crediantals\n 3.exit ");
-		Scanner scan = new Scanner(System.in);
-		int choose = scan.nextInt();
-		switch (choose) {
-		case 1:
-
-			try {
-				BufferedReader br1 = new BufferedReader(new FileReader("Doctorslog.txt"));
-				String line;
-				while ((line = br1.readLine()) != null) {
-					parts2 = line.split(",");
-					docuser = parts2[0].trim();
-					password = parts2[1].trim();
-
-					if (username.equals(docuser)) {
-						System.out.println("Doctor Info:");
-						System.out.println("Doctor user: " + docuser);
-						System.out.println("password: " + password);
-						MyLogger.writeToLog("display the Doctor's username and password done by: "+username);
-
-						break;
-
-					}
-				}
-
-			} catch (IOException e) {
-	            MyLogger.writeToLog("Exception:: ",e);
-				System.out.println("error in read the data");
-			}
-			break;
-
-		case 2:
 			System.out.println("please write your name please");
 			Scanner name = new Scanner(System.in);
 			String inputname = name.next();
@@ -183,18 +153,10 @@ class Doctor {
 			} catch (IOException e) {
 	            MyLogger.writeToLog("Exception:: ",e);
 				System.out.println("error with reading the data");
+			}catch(ArrayIndexOutOfBoundsException e) {
+				System.out.println("an error occured");
 			}
-			break;
-
-		case 3:
-			System.out.println("exit");
-			System.exit(0);
-			break;
-		default:
-			System.out.println("Invalid input");
 		}
-
-	}
 
 	private void enterPatientMedicalInfo() {
 		System.out.println("Please enter the patient's name,medical situation, and medical treatment in order:");
@@ -231,6 +193,51 @@ class Doctor {
 	        } while (input.length() > maxLength);
 
 	        return input;
+	        
 	    }
+	  
+	  
+		// ****** getter and sitter  ******//
 
+	  
+	  
+	  public static String getUsername() {
+			return username;
+		}
+
+		public static void setUsername(String username) {
+			Doctor.username = username;
+		}
+
+		public static String getPassword() {
+			return password;
+		}
+
+		public static void setPassword(String password) {
+			Doctor.password = password;
+		}
+
+		public static String getDbusername() {
+			return dbusername;
+		}
+
+		public static void setDbusername(String dbusername) {
+			Doctor.dbusername = dbusername;
+		}
+		
+	  
+	  
+	  
+	  
+	  
+	  
+	// ******  testing    ******//
+		
+		
+		 public void setInputForTesting(String username, String password) {
+		        setUsername(username);
+		        setPassword(password);
+		    }
+
+		
 }

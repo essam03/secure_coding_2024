@@ -73,7 +73,10 @@ class Patient {
             MyLogger.writeToLog("Exception:: ",e);
 			System.out.println("there's an error occured  " + e.getMessage());
 			return false;
-		} finally {
+		} catch(ArrayIndexOutOfBoundsException e){ 
+			System.out.println("there's an error occured");
+			return false;
+		}finally {
 			if (br1 != null) {
 				try {
 					br1.close();
@@ -117,40 +120,8 @@ class Patient {
 		String patient_age;
 		String patient_gendar;
 		String phone;
-
-		System.out.println("choose which data you want: \n 1.the username and password \n 2.the rest of crediantals ");
-		Scanner scan = new Scanner(System.in);
-		int choose = scan.nextInt();
-		switch (choose) {
-		case 1:
-			try {
-				BufferedReader br = new BufferedReader(new FileReader("Patientslogs.txt"));
-				String line;
-				while ((line = br.readLine()) != null) {
-					parts2 = line.split(",");
-					patuser = parts2[0].trim();
-					password = parts2[1].trim();
-
-					if (username.equals(patuser)) {
-						System.out.println("patient Info:");
-						System.out.println("patient user: " + patuser);
-						System.out.println("password: " + password);
-						MyLogger.writeToLog("display the patient's username and password done by: "+username);
-
-						break;
-
-					}
-				}
-
-			} catch (IOException e) {
-	            MyLogger.writeToLog("Exception:: ",e);
-				System.out.println("error with reading the data");
-			}
-			break;
-
-		case 2:
-			try {
-				System.out.println("please write your name of 2 sylabols with space between them");
+		try {
+				System.out.println("please write your name");
 				Scanner name = new Scanner(System.in);
 				String inputname = name.next();
 
@@ -177,28 +148,18 @@ class Patient {
 			} catch (IOException e) {
 	            MyLogger.writeToLog("Exception:: ",e);
 				System.out.println("error with reading the data");
+			}catch(ArrayIndexOutOfBoundsException e) {
+				System.out.println("an error occured");
 			}
 
-			break;
-			
-		case 3:
-			System.out.println("exit");
-			System.exit(0);
-			break;
-			
-			default:
-				System.out.println("Invaild input");
-
 		}
-
-	}
 
 	private void displayMedicalRecords() {
 		String[] parts2;
 		String patient_name;
 		String medicl_sutiation;
 		String medical_treatment;
-		System.out.println("please enter your first and last name and space between them");
+		System.out.println("please enter your name");
 		Scanner patname=new Scanner(System.in);
 		String inputname=patname.next();
 		try {
@@ -227,6 +188,8 @@ class Patient {
 		} catch (IOException e) {
             MyLogger.writeToLog("Exception:: ",e);
 			System.out.println("error with reading the data");
+		}catch(ArrayIndexOutOfBoundsException e) {
+			System.out.println("an error occured");
 		}
 	}
 
